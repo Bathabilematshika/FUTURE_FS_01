@@ -4,7 +4,7 @@ A responsive personal portfolio website showcasing my skills, projects, and prof
 Built as Task 1 of the Future Interns Full Stack Web Development internship.
 
 ## Live Demo
-[Add your live site link here after Step 8]
+[Live Demo](https://bathabilematshika.github.io/FUTURE_FS_01/)
 
 ## Pages
 - Home
@@ -30,5 +30,4 @@ Built as Task 1 of the Future Interns Full Stack Web Development internship.
 2. Open the folder and double-click `index.html`
 
 ## Author
-[Your Name]
-[Your LinkedIn link]
+Bathabile Matshika
