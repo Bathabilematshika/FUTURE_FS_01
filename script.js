@@ -11,29 +11,30 @@ if (contactForm) {
     contactForm.appendChild(status);
   }
  
-  contactForm.addEventListener('submit', function (e) {
+  contactForm.addEventListener('submit', async function (e) {
     e.preventDefault();
- 
-    const email = document.getElementById('email').value.trim();
-    const message = document.getElementById('message').value.trim();
- 
-    if (!email || !message) {
-      status.textContent = 'Please fill in both your email and message before sending.';
-      status.style.color = '#B5533C';
-      return;
-    }
- 
-    // Basic email format check
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailPattern.test(email)) {
-      status.textContent = 'Please enter a valid email address.';
-      status.style.color = '#B5533C';
-      return;
-    }
- 
-    // Placeholder success behavior until a real backend/email service is connected
-    status.textContent = 'Thanks! Your message is ready to send — connect a service like Formspree or EmailJS to actually deliver it.';
+
+    status.textContent = 'Sending...';
     status.style.color = '#2E5F8A';
-    contactForm.reset();
-  });
+
+    try {
+        const response = await fetch('https://formspree.io/f/xljgevwz', {
+            method: 'POST',
+            body: new FormData(contactForm),
+            headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+            status.textContent = 'Thanks! Your message has been sent.';
+            status.style.color = '#1a7f4b';
+            contactForm.reset();
+        } else {
+            status.textContent = 'Something went wrong. Please try again.';
+            status.style.color = '#c0392b';
+        }
+    } catch (error) {
+        status.textContent = 'Network error. Please try again later.';
+        status.style.color = '#c0392b';
+    }
+});
 }
